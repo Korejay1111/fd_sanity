@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GMJ Podcast – Glory, Majesty & Joy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Inter',sans-serif;background:#fff;color:#0d1b3e;overflow-x:hidden;line-height:1.6}
+img{max-width:100%;display:block}
+button{cursor:pointer;font-family:'Inter',sans-serif;border:none;background:none}
+a{text-decoration:none;color:inherit}
+:root{
+  --b900:#042C53;--b800:#0C447C;--b700:#185FA5;--b500:#378ADD;--b300:#85B7EB;--b100:#B5D4F4;--b50:#E6F1FB;
+  --white:#fff;--g50:#f8faff;
+  --tm:#334680;--tmut:#6b7eaa;
+  --ease:cubic-bezier(.4,0,.2,1);
+  --r8:8px;--r12:12px;--r20:20px;--r28:28px;--rfull:9999px;
+  --nav:64px;--max:1140px;
+}
+/* NAV */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav);background:rgba(255,255,255,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(55,138,221,.12);display:flex;align-items:center;padding:0 clamp(16px,5vw,60px);transition:box-shadow .3s}
+.navbar.scrolled{box-shadow:0 2px 20px rgba(4,44,83,.10)}
+.nav-inner{width:100%;max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand-logo{width:38px;height:38px;min-width:38px;border-radius:var(--r8);overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.brand-logo svg{width:18px;height:18px;fill:#E6F1FB}
+.brand-text{display:flex;flex-direction:column;line-height:1.2}
+.brand-name{font-family:'Playfair Display',serif;font-size:clamp(.8rem,2.2vw,1.05rem);font-weight:700;color:var(--b900);letter-spacing:.03em}
+.brand-sub{font-size:.58rem;color:var(--b500);font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-btn{padding:8px 13px;border-radius:var(--r8);font-size:.86rem;font-weight:500;color:var(--tm);transition:all .2s;white-space:nowrap}
+.nav-btn:hover{background:var(--b50);color:var(--b700)}
+.nav-btn.active{color:var(--b900);background:var(--b50)}
+.btn-counsel-nav{background:var(--b700);color:#fff;padding:9px 20px;border-radius:var(--rfull);font-size:.84rem;font-weight:600;box-shadow:0 4px 14px rgba(55,138,221,.35);transition:background .2s,transform .2s;white-space:nowrap}
+.btn-counsel-nav:hover{background:var(--b900);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:6px;border-radius:var(--r8)}
+.hamburger span{display:block;width:22px;height:2px;background:var(--b900);border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-nav{display:none;position:fixed;top:var(--nav);left:0;right:0;z-index:999;background:rgba(255,255,255,.98);backdrop-filter:blur(20px);border-bottom:1px solid rgba(55,138,221,.12);padding:12px clamp(16px,5vw,60px) 20px;flex-direction:column;gap:2px;animation:slideDown .25s var(--ease)}
+.mobile-nav.open{display:flex}
+.m-link{display:block;padding:12px 14px;border-radius:var(--r8);font-size:.95rem;font-weight:500;color:#0d1b3e;border-bottom:1px solid rgba(55,138,221,.08);transition:background .2s,color .2s;text-align:left;width:100%}
+.m-link:hover{background:var(--b50);color:var(--b700)}
+.m-counsel{margin-top:10px;background:var(--b700) !important;color:#fff !important;border-radius:var(--rfull) !important;text-align:center !important;font-weight:600 !important;font-size:.9rem !important;padding:13px !important;border:none !important;border-bottom:none !important}
+
+
+
+
+
+
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+/* LAYOUT */
+.page-body{padding-top:var(--nav)}
+.container{width:100%;max-width:var(--max);margin:0 auto;padding:0 clamp(16px,5vw,60px)}
+
+/* HERO */
+.hero{background:linear-gradient(150deg,var(--g50) 0%,#fff 55%,var(--b50) 100%);padding:clamp(52px,9vw,100px) clamp(16px,5vw,60px) clamp(52px,9vw,88px);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-12%;right:-8%;width:min(55vw,580px);height:min(55vw,580px);border-radius:50%;background:radial-gradient(circle,rgba(55,138,221,.10) 0%,transparent 70%);pointer-events:none;animation:pulse 7s ease-in-out infinite}
+.hero::after{content:'';position:absolute;bottom:-10%;left:-6%;width:min(35vw,380px);height:min(35vw,380px);border-radius:50%;background:radial-gradient(circle,rgba(55,138,221,.07) 0%,transparent 70%);pointer-events:none;animation:pulse 9s ease-in-out infinite reverse}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.hero-grid{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:center;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--b50);border:1px solid var(--b100);color:var(--b800);padding:6px 14px;border-radius:var(--rfull);font-size:.72rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;margin-bottom:20px;animation:fadeUp .7s var(--ease) both}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--b500);flex-shrink:0;animation:blink 1.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4.5vw,3.7rem);font-weight:900;line-height:1.1;color:var(--b900);margin-bottom:16px;animation:fadeUp .8s .1s var(--ease) both}
+.hero-title em{font-style:italic;color:var(--b500)}
+.hero-desc{font-size:clamp(.88rem,1.6vw,1rem);color:var(--tmut);line-height:1.78;max-width:480px;margin-bottom:32px;animation:fadeUp .9s .2s var(--ease) both}
+.hero-btns{display:flex;flex-wrap:wrap;gap:10px;animation:fadeUp 1s .3s var(--ease) both}
+.btn-primary{background:var(--b900);color:#fff;padding:13px 26px;border-radius:var(--rfull);font-size:.9rem;font-weight:600;box-shadow:0 4px 16px rgba(4,44,83,.28);display:inline-flex;align-items:center;gap:7px;transition:all .25s}
+.btn-primary:hover{background:var(--b700);transform:translateY(-2px);box-shadow:0 8px 26px rgba(4,44,83,.32)}
+.btn-ghost{background:transparent;color:var(--b900);padding:13px 26px;border-radius:var(--rfull);font-size:.9rem;font-weight:600;border:2px solid rgba(4,44,83,.18);display:inline-flex;align-items:center;gap:7px;transition:all .25s}
+.btn-ghost:hover{border-color:var(--b500);color:var(--b700);background:var(--b50);transform:translateY(-2px)}
+.btn-blue{background:var(--b700);color:#fff;padding:13px 26px;border-radius:var(--rfull);font-size:.9rem;font-weight:600;border:none;box-shadow:0 4px 16px rgba(55,138,221,.38);display:inline-flex;align-items:center;gap:7px;transition:all .25s}
+.btn-blue:hover{background:var(--b800);transform:translateY(-2px)}
+.vinyl-wrap{display:flex;justify-content:center;align-items:center;animation:fadeLeft 1s .4s var(--ease) both}
+.vinyl{width:clamp(170px,24vw,300px);height:clamp(170px,24vw,300px);border-radius:50%;background:conic-gradient(from 0deg,var(--b900) 0%,var(--b700) 30%,var(--b500) 60%,var(--b300) 80%,var(--b900) 100%);display:flex;align-items:center;justify-content:center;animation:spin 18s linear infinite;box-shadow:0 22px 55px rgba(4,44,83,.35);position:relative;flex-shrink:0}
+.vinyl::before{content:'';position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(rgba(255,255,255,.04) 0deg 2deg,transparent 2deg 6deg)}
+.vinyl-center{width:clamp(68px,8.5vw,96px);height:clamp(68px,8.5vw,96px);border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;position:relative}
+.vinyl-label{font-family:'Playfair Display',serif;font-size:clamp(.38rem,.78vw,.56rem);font-weight:700;color:var(--b900);text-align:center;line-height:1.4}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeLeft{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:translateX(0)}}
+
+/* STATS */
+.stats-bar{background:var(--b900);padding:clamp(22px,4vw,48px) clamp(16px,5vw,60px)}
+.stats-grid{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.stat-item{text-align:center;padding:clamp(10px,2vw,18px) clamp(8px,2vw,24px);border-right:1px solid rgba(133,183,235,.14)}
+.stat-item:last-child{border-right:none}
+.stat-num{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3.2vw,2.2rem);font-weight:900;color:#E6F1FB;line-height:1}
+.stat-lbl{font-size:clamp(.58rem,1vw,.72rem);color:var(--b300);font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+
+/* SECTIONS */
+.section{padding:clamp(48px,7vw,84px) clamp(16px,5vw,60px)}
+.section.alt{background:var(--g50)}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--b500);display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.eyebrow::before{content:'';width:22px;height:2px;background:var(--b500);border-radius:2px;display:inline-block;flex-shrink:0}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:900;color:var(--b900);margin-bottom:clamp(24px,4vw,44px)}
+
+/* EPISODE CARDS */
+.ep-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.5vw,22px)}
+.ep-card{background:#fff;border:1px solid rgba(55,138,221,.12);border-radius:var(--r20);padding:clamp(18px,2.5vw,28px);display:flex;flex-direction:column;transition:all .3s var(--ease)}
+.ep-card:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(55,138,221,.13);border-color:rgba(55,138,221,.28)}
+.ep-tag{font-size:.68rem;font-weight:600;color:var(--b500);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.ep-title{font-family:'Playfair Display',serif;font-size:clamp(1rem,1.8vw,1.18rem);font-weight:700;color:var(--b900);margin-bottom:10px;line-height:1.35}
+.ep-desc{font-size:clamp(.8rem,1.3vw,.88rem);color:var(--tmut);line-height:1.68;flex:1;margin-bottom:18px}
+.ep-foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
+.ep-dur{font-size:.78rem;color:var(--tmut)}
+.play-btn{width:38px;height:38px;min-width:38px;border-radius:50%;background:var(--b900);display:flex;align-items:center;justify-content:center;border:none;box-shadow:0 4px 12px rgba(4,44,83,.28);transition:all .25s}
+.play-btn:hover{background:var(--b700);transform:scale(1.1)}
+.play-btn svg{width:13px;height:13px;fill:#fff;margin-left:2px}
+.sec-cta{text-align:center;margin-top:clamp(28px,4vw,48px)}
+
+/* CTA STRIP */
+.cta-strip{background:linear-gradient(135deg,var(--b900) 0%,var(--b700) 100%);padding:clamp(52px,8vw,88px) clamp(16px,5vw,60px);text-align:center;position:relative;overflow:hidden}
+.cta-strip::before{content:'';position:absolute;top:-160px;left:50%;transform:translateX(-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.06) 0%,transparent 60%);pointer-events:none}
+.cta-inner{position:relative;z-index:2;max-width:600px;margin:0 auto}
+.cta-strip h2{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,3.5vw,2.7rem);font-weight:900;color:#fff;margin-bottom:14px}
+.cta-strip p{font-size:clamp(.88rem,1.5vw,1.02rem);color:rgba(255,255,255,.75);line-height:1.75;margin-bottom:36px}
+.btn-white{background:#fff;color:var(--b900);padding:14px 32px;border-radius:var(--rfull);font-size:.95rem;font-weight:700;border:none;box-shadow:0 6px 24px rgba(0,0,0,.2);display:inline-flex;align-items:center;gap:8px;transition:all .25s}
+.btn-white:hover{background:var(--b50);transform:translateY(-3px);box-shadow:0 14px 36px rgba(0,0,0,.25)}
+
+/* FOOTER */
+.footer{background:#0a1020;padding:clamp(40px,6vw,64px) clamp(16px,5vw,60px) clamp(20px,4vw,32px)}
+.footer-inner{max-width:var(--max);margin:0 auto;text-align:center}
+.footer-brand{font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;font-weight:700;margin-bottom:8px}
+.footer-tagline{font-size:.84rem;color:rgba(255,255,255,.45);line-height:1.6;margin-bottom:20px}
+.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 20px;margin-bottom:24px}
+.footer-links a{color:rgba(255,255,255,.45);font-size:.82rem;transition:color .2s}
+.footer-links a:hover{color:var(--b300)}
+.footer-copy{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;font-size:.75rem;color:rgba(255,255,255,.28)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+/* Tablet landscape & small desktop: 768–1023px */
+@media(max-width:1023px){
+  .ep-grid{grid-template-columns:repeat(2,1fr)}
+}
+/* Tablet portrait: 600–767px */
+@media(max-width:767px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .hero-grid{grid-template-columns:1fr;text-align:center;justify-items:center}
+  .hero-badge{margin:0 auto 20px}
+  .hero-desc{max-width:100%;margin-left:auto;margin-right:auto}
+  .hero-btns{justify-content:center}
+  .vinyl-wrap{margin-top:36px;order:-1}
+  .vinyl{width:clamp(150px,44vw,230px);height:clamp(150px,44vw,230px)}
+  .vinyl-center{width:clamp(58px,13vw,80px);height:clamp(58px,13vw,80px)}
+  .vinyl-label{font-size:clamp(.34rem,2.2vw,.5rem)}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .stat-item{border-right:none;border-bottom:1px solid rgba(133,183,235,.14)}
+  .stat-item:nth-child(odd){border-right:1px solid rgba(133,183,235,.14)}
+  .stat-item:last-child{border-bottom:none}
+  .ep-grid{grid-template-columns:1fr}
+  .cta-strip h2{font-size:clamp(1.4rem,6vw,1.9rem)}
+}
+/* Mobile: up to 599px */
+@media(max-width:599px){
+  .hero-btns{flex-direction:column;align-items:center}
+  .btn-primary,.btn-ghost,.btn-blue{width:100%;max-width:300px;justify-content:center}
+  .vinyl-wrap{order:-1}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+/* Very small: up to 360px */
+@media(max-width:360px){
+  :root{--nav:58px}
+  .brand-name{font-size:.8rem}
+  .hero-title{font-size:1.65rem}
+  .btn-primary,.btn-ghost,.btn-blue{font-size:.84rem;padding:12px 18px}
+}
+
+/* ── SOCIAL PLATFORM ICONS ── */
+.plat-icon{display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.plat-icon svg{width:20px;height:20px;transition:transform .2s}
+.plat-pill:hover .plat-icon svg{transform:scale(1.15)}
+.plat-pill{cursor:pointer}
+
+/* ── FOOTER SOCIAL ICONS ── */
+.footer-socials{display:flex;justify-content:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.footer-social{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);transition:all .25s;flex-shrink:0}
+.footer-social svg{width:18px;height:18px;fill:currentColor}
+.footer-social:hover{background:rgba(255,255,255,.18);color:#fff;transform:translateY(-3px);border-color:rgba(255,255,255,.3)}
+.footer-social.wa:hover{background:#25D366;border-color:#25D366;color:#fff}
+.footer-social.ig:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:#E1306C;color:#fff}
+.footer-social.tg:hover{background:#0088CC;border-color:#0088CC;color:#fff}
+.footer-social.sp:hover{background:#1DB954;border-color:#1DB954;color:#fff}
+.footer-social.yt:hover{background:#FF0000;border-color:#FF0000;color:#fff}
+</style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <div class="brand-logo"><img src="Gmj_logo.jpg" alt="GMJ Logo" style="width:38px;height:38px;border-radius:8px;object-fit:cover;display:block"/></div>
+      <div class="brand-text"><span class="brand-name">GMJ PODCAST</span><span class="brand-sub">Good Morning Jesus</span></div>
+    </a>
+    <div class="nav-links">
+      <button class="nav-btn active" onclick="location.href='index.html'">Home</button>
+      <button class="nav-btn" onclick="location.href='about.html'">About</button>
+      <button class="nav-btn" onclick="location.href='podcast.html'">Podcast</button>
+      <button class="btn-counsel-nav" onclick="location.href='podcast.html#counselling'">💬 Counselling</button>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a class="m-link" href="index.html">🏠 Home</a>
+  <a class="m-link" href="about.html">ℹ️ About</a>
+  <a class="m-link" href="podcast.html">🎙️ Podcast</a>
+  <button class="m-link m-counsel" onclick="location.href='podcast.html#counselling'">💬 Book Counselling</button>
+</div>
+
+<div class="page-body">
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge"><span class="live-dot"></span>Now Broadcasting · </div>
+        <h1 class="hero-title">Good<br/>Morning <span style="color: #185FA5;">Jesus.</span></h1>
+        <p class="hero-desc"> Start your day with Pastor Peter Ilesanmi on the Good Morning Jesus (GMJ) Podcast. Receive daily wisdom nuggets, prophetic blessings, and anointed teachings to strengthen your faith and guide your walk with God. 
+          New episodes every morning to empower your spiritual journey.Anointed messages, Spirit-filled conversations, and transformative teachings — wherever you are, whenever you need it.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="location.href='podcast.html'">🎧 Listen Now</button>
+          <button class="btn-ghost" onclick="location.href='about.html'">Our Story →</button>
+          <button class="btn-blue" onclick="location.href='podcast.html#counselling'">💬 Counselling</button>
+        </div>
+      </div>
+      <div class="vinyl-wrap">
+        <div class="vinyl"><div class="vinyl-center"><div class="vinyl-label">GMJ<br/>PODCAST</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stats-grid">
+      <div class="stat-item reveal"><div class="stat-num">150+</div><div class="stat-lbl">Episodes</div></div>
+      <div class="stat-item reveal"><div class="stat-num">12K+</div><div class="stat-lbl">Listeners</div></div>
+      <div class="stat-item reveal"><div class="stat-num">3</div><div class="stat-lbl">Seasons</div></div>
+      <div class="stat-item reveal"><div class="stat-num">20+</div><div class="stat-lbl">Nations</div></div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="eyebrow reveal">Featured This Week</div>
+      <div class="sec-title reveal">Latest Episodes</div>
+      <div class="ep-grid" id="homeEpGrid">
+        <!-- Loading skeleton -->
+        <div class="ep-card reveal" style="min-height:220px;display:flex;align-items:center;justify-content:center;color:var(--tmut);font-size:.88rem">⏳ Loading…</div>
+        <div class="ep-card reveal" style="min-height:220px;display:flex;align-items:center;justify-content:center;color:var(--tmut);font-size:.88rem">⏳ Loading…</div>
+        <div class="ep-card reveal" style="min-height:220px;display:flex;align-items:center;justify-content:center;color:var(--tmut);font-size:.88rem">⏳ Loading…</div>
+      </div>
+      <div class="sec-cta reveal">
+        <button class="btn-ghost" onclick="location.href='podcast.html'">View All Episodes →</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-strip" id="counselling">
+    <div class="cta-inner reveal">
+      <h2>Need Someone to Talk To?</h2>
+      <p>Our trained counsellors are here — whether you're facing personal struggles, seeking spiritual direction, or simply need a listening ear.</p>
+      <button class="btn-white" onclick="location.href='podcast.html#counselling'">💬 Book a Counselling Session</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><img src="Gmj_logo.jpg" alt="GMJ" style="width:44px;height:44px;border-radius:8px;object-fit:cover;display:inline-block;vertical-align:middle;margin-right:8px"/> GMJ Podcast</div>
+      <p class="footer-tagline">Good · Morning · Jesus — Broadcasting the Gospel worldwide.</p>
+      <div class="footer-socials">
+          <a href="https://wa.me/2347068790872?text=Hello%2C%20I%20would%20like%20to%20book%20a%20counselling%20session%20with%20GMJ%20Podcast." target="_blank" rel="noopener" class="footer-social wa" title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a10.56 10.56 0 0 1-5.369-1.461l-.385-.229-3.989 1.046 1.064-3.886-.251-.399a10.56 10.56 0 0 1-1.617-5.623c.002-5.834 4.748-10.578 10.584-10.578a10.52 10.52 0 0 1 7.48 3.099 10.52 10.52 0 0 1 3.095 7.483c-.003 5.835-4.748 10.578-10.582 10.578"/></svg></a>
+          <a href="https://instagram.com/GMJ.Podcast" target="_blank" rel="noopener" class="footer-social ig" title="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069m0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073m0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162m0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4m6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44"/></svg></a>
+          <a href="https://t.me/GMJPodcast" target="_blank" rel="noopener" class="footer-social tg" title="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+          <a href="https://open.spotify.com/show/6Dk3oSY8gEGYVSt4v4BWuD" target="_blank" rel="noopener" class="footer-social sp" title="Spotify"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+          <a href="https://youtube.com/@GMJPodcast" target="_blank" rel="noopener" class="footer-social yt" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="podcast.html">Podcast</a><a href="podcast.html#counselling">Counselling</a>
+      </div>
+      <div class="footer-copy">© 2025 GMJ Podcast. All rights reserved. Built with faith &amp; purpose.</div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  const navbar    = document.getElementById('navbar');
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+
+  if (navbar)
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 10));
+
+  if (hamburger && mobileNav) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+    document.querySelectorAll('.m-link').forEach(el =>
+      el.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileNav.classList.remove('open');
+      })
+    );
+  }
+
+  const ro = new IntersectionObserver((entries) =>
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('in'), i * 70);
+    }), { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  // Load top 3 episodes from Sanity
+  loadHomeEpisodes();
+});
+
+/* ── SANITY CONFIG (must match podcast.html) ── */
+const HOME_SANITY_PROJECT_ID = '8ofs05v1';
+const HOME_SANITY_DATASET    = 'production';
+const HOME_SANITY_API_VER    = '2024-01-01';
+
+function homeSanityUrl(query){
+  return `https://${HOME_SANITY_PROJECT_ID}.apicdn.sanity.io/v${HOME_SANITY_API_VER}/data/query/${HOME_SANITY_DATASET}?query=${encodeURIComponent(query)}`;
+}
+
+async function loadHomeEpisodes(){
+  const grid = document.getElementById('homeEpGrid');
+  if(!grid) return;
+  try {
+    const query = `*[_type == "episode"] | order(publishedAt desc)[0..2] {
+      _id, title, "num": episodeNumber, series,
+      "desc": description, duration, publishedAt,
+      "src": audioFile.asset->url
+    }`;
+    const res  = await fetch(homeSanityUrl(query));
+    if(!res.ok) throw new Error('fetch failed');
+    const data = await res.json();
+    const eps  = data.result || [];
+
+    if(eps.length === 0){
+      grid.innerHTML = `<div class="ep-card reveal" style="grid-column:1/-1;text-align:center;padding:40px 20px;color:var(--tmut)">
+        <div style="font-size:2rem;margin-bottom:10px">🎙️</div>
+        <p>No episodes yet — <a href="podcast.html" style="color:var(--b500);font-weight:600">check back soon!</a></p>
+      </div>`;
+      return;
+    }
+
+    grid.innerHTML = eps.map(ep => {
+      const num  = ep.num  || '—';
+      const dur  = ep.duration || '';
+      const desc = ep.desc || 'Join Pastor Peter Ilesanmi in this powerful episode.';
+      const src  = ep.src  || '';
+      const ser  = ep.series || 'GMJ Podcast';
+      return `<div class="ep-card reveal">
+        <div class="ep-tag">Episode ${num} · ${ser}</div>
+        <div class="ep-title">${escHomeHtml(ep.title||'Untitled')}</div>
+        <div class="ep-desc">${escHomeHtml(desc)}</div>
+        <div class="ep-foot">
+          <span class="ep-dur">⏱ ${dur}</span>
+          <button class="play-btn" onclick="location.href='podcast.html'" title="Listen on Podcast page">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+      </div>`;
+    }).join('');
+
+    // re-observe new cards for reveal animation
+    const ro2 = new IntersectionObserver((entries) =>
+      entries.forEach((e,i) => { if(e.isIntersecting) setTimeout(()=>e.target.classList.add('in'), i*70) }), {threshold:0.1});
+    grid.querySelectorAll('.reveal').forEach(el => ro2.observe(el));
+
+  } catch(err){
+    console.warn('[GMJ Home] Could not load episodes from Sanity:', err);
+    // Fall back silently — grid keeps skeleton text
+    const grid2 = document.getElementById('homeEpGrid');
+    if(grid2) grid2.innerHTML = `<div class="ep-card reveal" style="grid-column:1/-1;text-align:center;padding:40px 20px;color:var(--tmut)">
+      <p>Episodes loading… <a href="podcast.html" style="color:var(--b500);font-weight:600">Visit the Podcast page →</a></p>
+    </div>`;
+  }
+}
+function escHomeHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+</script>
+</body>
+</html>

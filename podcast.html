@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Podcast – GMJ Podcast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Inter',sans-serif;background:#fff;color:#0d1b3e;overflow-x:hidden;line-height:1.6}
+button{cursor:pointer;font-family:'Inter',sans-serif;border:none;background:none}
+a{text-decoration:none;color:inherit}
+:root{
+  --b900:#042C53;--b800:#0C447C;--b700:#185FA5;--b500:#378ADD;--b300:#85B7EB;--b100:#B5D4F4;--b50:#E6F1FB;
+  --white:#fff;--g50:#f8faff;
+  --tm:#334680;--tmut:#6b7eaa;
+  --ease:cubic-bezier(.4,0,.2,1);
+  --r8:8px;--r12:12px;--r20:20px;--r28:28px;--rfull:9999px;
+  --nav:64px;--max:1140px;
+}
+/* NAV */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav);background:rgba(255,255,255,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(55,138,221,.12);display:flex;align-items:center;padding:0 clamp(16px,5vw,60px);transition:box-shadow .3s}
+.navbar.scrolled{box-shadow:0 2px 20px rgba(4,44,83,.10)}
+.nav-inner{width:100%;max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand-logo{width:38px;height:38px;min-width:38px;border-radius:var(--r8);overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.brand-logo svg{width:18px;height:18px;fill:#E6F1FB}
+.brand-text{display:flex;flex-direction:column;line-height:1.2}
+.brand-name{font-family:'Playfair Display',serif;font-size:clamp(.8rem,2.2vw,1.05rem);font-weight:700;color:var(--b900);letter-spacing:.03em}
+.brand-sub{font-size:.58rem;color:var(--b500);font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-btn{padding:8px 13px;border-radius:var(--r8);font-size:.86rem;font-weight:500;color:var(--tm);transition:all .2s;white-space:nowrap}
+.nav-btn:hover{background:var(--b50);color:var(--b700)}
+.nav-btn.active{color:var(--b900);background:var(--b50)}
+.btn-counsel-nav{background:var(--b700);color:#fff;padding:9px 20px;border-radius:var(--rfull);font-size:.84rem;font-weight:600;box-shadow:0 4px 14px rgba(55,138,221,.35);transition:background .2s,transform .2s;white-space:nowrap}
+.btn-counsel-nav:hover{background:var(--b900);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:6px;border-radius:var(--r8)}
+.hamburger span{display:block;width:22px;height:2px;background:var(--b900);border-radius:2px;transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-nav{display:none;position:fixed;top:var(--nav);left:0;right:0;z-index:999;background:rgba(255,255,255,.98);backdrop-filter:blur(20px);border-bottom:1px solid rgba(55,138,221,.12);padding:12px clamp(16px,5vw,60px) 20px;flex-direction:column;gap:2px;animation:slideDown .25s var(--ease)}
+.mobile-nav.open{display:flex}
+.m-link{display:block;padding:12px 14px;border-radius:var(--r8);font-size:.95rem;font-weight:500;color:#0d1b3e;border-bottom:1px solid rgba(55,138,221,.08);transition:background .2s,color .2s;text-align:left;width:100%}
+.m-link:hover{background:var(--b50);color:var(--b700)}
+.m-counsel{margin-top:10px;background:var(--b700) !important;color:#fff !important;border-radius:var(--rfull) !important;text-align:center !important;font-weight:600 !important;font-size:.9rem !important;padding:13px !important;border:none !important;border-bottom:none !important}
+
+
+
+
+
+
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+.page-body{padding-top:var(--nav)}
+.container{width:100%;max-width:var(--max);margin:0 auto;padding:0 clamp(16px,5vw,60px)}
+
+/* PAGE HERO */
+.page-hero{background:linear-gradient(140deg,var(--b900) 0%,var(--b800) 50%,var(--b700) 100%);padding:clamp(64px,10vw,110px) clamp(16px,5vw,60px) clamp(52px,8vw,88px);text-align:center;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:-180px;left:50%;transform:translateX(-50%);width:min(90vw,700px);height:min(90vw,700px);border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 65%);pointer-events:none}
+.page-hero-inner{position:relative;z-index:2;max-width:680px;margin:0 auto}
+.ph-badge{display:inline-flex;align-items:center;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);color:#fff;padding:6px 16px;border-radius:var(--rfull);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px;animation:fadeUp .7s var(--ease) both}
+.page-hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5.5vw,3.8rem);font-weight:900;color:#fff;line-height:1.1;margin-bottom:14px;animation:fadeUp .8s .1s var(--ease) both}
+.page-hero h1 em{font-style:italic;color:var(--b100)}
+.page-hero p{font-size:clamp(.88rem,1.6vw,1.02rem);color:rgba(255,255,255,.72);line-height:1.76;animation:fadeUp .9s .2s var(--ease) both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.wave-divider{display:block;background:#fff;margin-top:-1px;width:100%}
+
+.section{padding:clamp(48px,7vw,84px) clamp(16px,5vw,60px)}
+.section.alt{background:var(--g50)}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--b500);display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.eyebrow::before{content:'';width:22px;height:2px;background:var(--b500);border-radius:2px;display:inline-block;flex-shrink:0}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:900;color:var(--b900);margin-bottom:clamp(24px,4vw,40px)}
+
+/* FEATURED */
+.featured-card{background:linear-gradient(135deg,var(--b900) 0%,var(--b800) 100%);border-radius:var(--r28);padding:clamp(24px,4vw,44px);display:grid;grid-template-columns:1fr auto;gap:clamp(20px,4vw,48px);align-items:center;position:relative;overflow:hidden;margin-bottom:clamp(32px,5vw,56px)}
+.featured-card::before{content:'';position:absolute;right:-80px;top:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 70%);pointer-events:none}
+.feat-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;padding:5px 14px;border-radius:var(--rfull);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.feat-title{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,2rem);font-weight:900;color:#fff;line-height:1.2;margin-bottom:12px}
+.feat-desc{font-size:clamp(.84rem,1.4vw,.95rem);color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:24px}
+.feat-meta{display:flex;align-items:center;flex-wrap:wrap;gap:14px}
+.feat-dur{font-size:.8rem;color:rgba(255,255,255,.55)}
+.btn-play-feat{background:#fff;color:var(--b900);padding:11px 24px;border-radius:var(--rfull);font-size:.88rem;font-weight:700;border:none;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:all .25s}
+.btn-play-feat:hover{background:var(--b50);transform:scale(1.04)}
+.feat-vinyl{width:clamp(100px,14vw,160px);height:clamp(100px,14vw,160px);border-radius:50%;background:conic-gradient(rgba(255,255,255,.18) 0%,rgba(255,255,255,.04) 50%,rgba(255,255,255,.18) 100%);border:2px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;animation:spin 10s linear infinite;flex-shrink:0;position:relative;z-index:2}
+.feat-vinyl-inner{width:clamp(38px,5vw,56px);height:clamp(38px,5vw,56px);border-radius:50%;background:var(--b900);border:3px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:clamp(.9rem,1.5vw,1.2rem)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* FILTER */
+.filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:clamp(20px,3vw,32px)}
+.f-tab{padding:8px 18px;border-radius:var(--rfull);font-size:.82rem;font-weight:600;border:2px solid rgba(55,138,221,.2);color:var(--tmut);transition:all .22s;background:transparent}
+.f-tab:hover,.f-tab.active{background:var(--b900);color:#fff;border-color:var(--b900)}
+
+/* EPISODE LIST */
+.ep-list{display:flex;flex-direction:column;gap:10px}
+.ep-row{display:grid;grid-template-columns:54px 1fr auto;align-items:center;gap:clamp(12px,2.5vw,20px);background:#fff;border:1px solid rgba(55,138,221,.12);border-radius:var(--r20);padding:clamp(14px,2vw,20px) clamp(14px,2.5vw,24px);transition:all .3s var(--ease);cursor:pointer}
+.ep-row:hover{transform:translateX(5px);border-color:rgba(55,138,221,.32);box-shadow:0 8px 28px rgba(55,138,221,.1)}
+.ep-row.ep-active{border-color:var(--b500);background:var(--b50);box-shadow:0 4px 18px rgba(55,138,221,.15)}
+.ep-row.ep-active .ep-name{color:var(--b700)}
+.ep-row.ep-active .play-btn{background:var(--b500)}
+.ep-badge{width:54px;height:54px;min-width:54px;border-radius:var(--r12);overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--b100)}
+.ep-info{min-width:0;overflow:hidden}
+.ep-series{font-size:.68rem;font-weight:600;color:var(--b500);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
+.ep-name{font-family:'Playfair Display',serif;font-size:clamp(.9rem,1.6vw,1.05rem);font-weight:700;color:var(--b900);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ep-snip{font-size:clamp(.76rem,1.1vw,.82rem);color:var(--tmut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ep-right{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.ep-dur{font-size:.78rem;color:var(--tmut);white-space:nowrap}
+.play-btn{width:40px;height:40px;min-width:40px;border-radius:50%;background:var(--b900);display:flex;align-items:center;justify-content:center;border:none;box-shadow:0 4px 12px rgba(4,44,83,.28);transition:all .25s;flex-shrink:0}
+.play-btn:hover{background:var(--b700);transform:scale(1.1)}
+.play-btn svg{width:13px;height:13px;fill:#fff;margin-left:2px}
+
+/* PLAYER BAR */
+/* ── FIXED BOTTOM PLAYER ── */
+.player-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:2000;
+  background:linear-gradient(135deg,var(--b900) 0%,var(--b800) 100%);
+  border-top:1px solid rgba(133,183,235,.18);
+  padding:0;
+  box-shadow:0 -4px 32px rgba(4,44,83,.35);
+  transform:translateY(100%);
+  transition:transform .4s cubic-bezier(.4,0,.2,1);
+}
+.player-bar.show{transform:translateY(0)}
+.pb-progress-wrap{
+  width:100%;height:4px;background:rgba(133,183,235,.2);
+  cursor:pointer;position:relative;
+}
+.pb-progress-wrap:hover{height:6px;transition:height .15s}
+.np-fill{height:100%;background:var(--b500);width:0%;transition:width .08s linear;pointer-events:none}
+.np-buffered{position:absolute;top:0;left:0;height:100%;background:rgba(133,183,235,.25);pointer-events:none}
+.pb-inner{
+  display:flex;align-items:center;
+  gap:clamp(8px,2vw,20px);
+  padding:clamp(10px,1.5vw,14px) clamp(14px,3vw,28px);
+}
+.np-art{width:42px;height:42px;border-radius:8px;object-fit:cover;flex-shrink:0;border:2px solid rgba(133,183,235,.25)}
+.np-info{flex:1;min-width:0;overflow:hidden}
+.np-title{font-size:clamp(.78rem,1.4vw,.9rem);font-weight:600;color:#E6F1FB;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.np-sub{font-size:.68rem;color:var(--b300);margin-top:1px}
+.np-time{font-size:.7rem;color:var(--b300);flex-shrink:0;min-width:72px;text-align:center;font-variant-numeric:tabular-nums}
+.np-ctrl{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.nc-btn{width:34px;height:34px;border-radius:50%;background:rgba(133,183,235,.15);display:flex;align-items:center;justify-content:center;border:none;transition:background .2s,transform .15s;flex-shrink:0}
+.nc-btn:hover{background:rgba(133,183,235,.32);transform:scale(1.08)}
+.nc-btn svg{width:13px;height:13px;fill:#E6F1FB}
+.nc-btn.play-main{width:40px;height:40px;background:var(--b500)}
+.nc-btn.play-main:hover{background:var(--b700)}
+.nc-btn.play-main svg{width:15px;height:15px}
+.vol-wrap{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.vol-wrap svg{width:14px;height:14px;fill:#E6F1FB;flex-shrink:0;cursor:pointer}
+.vol-slider{-webkit-appearance:none;appearance:none;width:clamp(60px,8vw,90px);height:3px;border-radius:3px;background:rgba(133,183,235,.25);outline:none;cursor:pointer}
+.vol-slider::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--b300);cursor:pointer}
+.vol-slider::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--b300);cursor:pointer;border:none}
+.nc-close{color:var(--b300);font-size:1.1rem;background:none;border:none;padding:4px 8px;transition:color .2s;flex-shrink:0;line-height:1}
+.nc-close:hover{color:#fff}
+/* loading spinner */
+.np-spin{display:none;width:16px;height:16px;border:2px solid rgba(133,183,235,.3);border-top-color:var(--b300);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+.np-spin.show{display:block}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* error toast */
+.audio-toast{
+  position:fixed;bottom:88px;left:50%;transform:translateX(-50%) translateY(12px);
+  background:#c0392b;color:#fff;padding:11px 22px;border-radius:12px;
+  font-size:.82rem;font-weight:600;opacity:0;pointer-events:none;
+  transition:all .3s;z-index:3000;
+  max-width:min(90vw, 500px);text-align:center;line-height:1.5;
+  box-shadow:0 4px 24px rgba(0,0,0,.35);
+}
+.audio-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* body padding when player is open */
+body.player-open .page-body{padding-bottom:80px}
+
+/* PLATFORMS */
+.plat-grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:24px}
+.plat-pill{display:flex;align-items:center;gap:10px;border:1px solid rgba(55,138,221,.18);border-radius:var(--r12);padding:11px 22px;font-size:.86rem;font-weight:600;color:#0d1b3e;background:#fff;transition:all .25s;text-decoration:none}
+.plat-pill:hover{border-color:var(--b500);background:var(--b50);color:var(--b900);transform:translateY(-2px)}
+.plat-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+/* COUNSEL FORM */
+.counsel-wrap{max-width:660px;margin:0 auto}
+.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,20px);margin-bottom:clamp(24px,4vw,40px)}
+.trust-card{background:#fff;border:1px solid rgba(55,138,221,.12);border-radius:var(--r20);padding:clamp(16px,2.5vw,24px)}
+.trust-icon{width:40px;height:40px;border-radius:var(--r8);background:var(--b50);border:1px solid var(--b100);display:flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:1.1rem}
+.trust-title{font-size:.9rem;font-weight:600;color:var(--b900);margin-bottom:6px}
+.trust-desc{font-size:.8rem;color:var(--tmut);line-height:1.65}
+.form-box{background:var(--g50);border:1px solid rgba(55,138,221,.12);border-radius:var(--r28);padding:clamp(24px,4vw,40px)}
+.form-box h3{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.8vw,1.8rem);font-weight:900;color:var(--b900);margin-bottom:8px}
+.form-box p{font-size:.88rem;color:var(--tmut);margin-bottom:22px;line-height:1.65}
+.form-note{background:var(--b50);border-left:3px solid var(--b500);border-radius:0 var(--r8) var(--r8) 0;padding:11px 14px;font-size:.82rem;color:var(--b800);margin-bottom:22px;line-height:1.6}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,2vw,16px);margin-bottom:14px}
+.f-field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+.f-field label{font-size:.78rem;font-weight:600;color:var(--b900);letter-spacing:.03em}
+.f-field input,.f-field select,.f-field textarea{padding:11px 14px;border-radius:var(--r8);border:1px solid rgba(55,138,221,.22);background:#fff;font-size:.88rem;font-family:'Inter',sans-serif;color:#0d1b3e;transition:border-color .2s;resize:vertical;width:100%}
+.f-field input:focus,.f-field select:focus,.f-field textarea:focus{outline:none;border-color:var(--b500);box-shadow:0 0 0 3px rgba(55,138,221,.12)}
+.btn-submit{width:100%;background:var(--b700);color:#fff;border:none;border-radius:var(--rfull);padding:14px;font-size:.95rem;font-weight:700;transition:background .2s,transform .2s}
+.btn-submit:hover{background:var(--b900);transform:translateY(-2px)}
+.success-box{display:none;text-align:center;padding:clamp(28px,5vw,48px) 20px}
+.success-box.show{display:block}
+.success-icon{font-size:3rem;margin-bottom:16px}
+.success-box h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--b900);margin-bottom:10px}
+.success-box p{font-size:.9rem;color:var(--tmut);line-height:1.7;max-width:420px;margin:0 auto 22px}
+.btn-ghost{background:transparent;color:var(--b900);padding:10px 22px;border-radius:var(--rfull);font-size:.86rem;font-weight:600;border:2px solid rgba(4,44,83,.18);transition:all .25s;display:inline-flex;align-items:center;gap:7px}
+.btn-ghost:hover{border-color:var(--b500);color:var(--b700);background:var(--b50)}
+
+/* FOOTER */
+.footer{background:#0a1020;padding:clamp(40px,6vw,64px) clamp(16px,5vw,60px) clamp(20px,4vw,32px)}
+.footer-inner{max-width:var(--max);margin:0 auto;text-align:center}
+.footer-brand{font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;font-weight:700;margin-bottom:8px}
+.footer-tagline{font-size:.84rem;color:rgba(255,255,255,.45);line-height:1.6;margin-bottom:20px}
+.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 20px;margin-bottom:24px}
+.footer-links a{color:rgba(255,255,255,.45);font-size:.82rem;transition:color .2s}
+.footer-links a:hover{color:var(--b300)}
+.footer-copy{border-top:1px solid rgba(255,255,255,.07);padding-top:22px;font-size:.75rem;color:rgba(255,255,255,.28)}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1023px){
+  .featured-card{grid-template-columns:1fr}
+  .feat-vinyl{display:none}
+}
+@media(max-width:767px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .ep-row{grid-template-columns:44px 1fr auto;gap:10px}
+  .vol-wrap{display:none}
+  .np-time{display:none}
+  .ep-snip{display:none}
+  .np-track{display:none}
+  .trust-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .page-hero h1{font-size:clamp(1.9rem,7vw,2.8rem)}
+}
+@media(max-width:599px){
+  .ep-row{grid-template-columns:1fr auto}
+  
+  .ep-dur{display:none}
+  .filter-bar{gap:6px}
+  .f-tab{padding:7px 13px;font-size:.78rem}
+  .plat-pill{padding:9px 14px;font-size:.82rem}
+  .feat-meta{flex-direction:column;align-items:flex-start;gap:10px}
+  .btn-play-feat{width:100%;justify-content:center}
+}
+@media(max-width:360px){
+  :root{--nav:58px}
+  .brand-name{font-size:.8rem}
+}
+
+/* ── SOCIAL PLATFORM ICONS ── */
+.plat-icon{display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.plat-icon svg{width:20px;height:20px;transition:transform .2s}
+.plat-pill:hover .plat-icon svg{transform:scale(1.15)}
+.plat-pill{cursor:pointer}
+
+/* ── FOOTER SOCIAL ICONS ── */
+.footer-socials{display:flex;justify-content:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.footer-social{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);transition:all .25s;flex-shrink:0}
+.footer-social svg{width:18px;height:18px;fill:currentColor}
+.footer-social:hover{background:rgba(255,255,255,.18);color:#fff;transform:translateY(-3px);border-color:rgba(255,255,255,.3)}
+.footer-social.wa:hover{background:#25D366;border-color:#25D366;color:#fff}
+.footer-social.ig:hover{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-color:#E1306C;color:#fff}
+.footer-social.tg:hover{background:#0088CC;border-color:#0088CC;color:#fff}
+.footer-social.sp:hover{background:#1DB954;border-color:#1DB954;color:#fff}
+.footer-social.yt:hover{background:#FF0000;border-color:#FF0000;color:#fff}
+
+/* ── WHATSAPP COUNSEL BUTTON ── */
+.btn-wa-counsel{
+  display:inline-flex;align-items:center;gap:12px;
+  background:#25D366;color:#fff;
+  padding:clamp(14px,2.5vw,18px) clamp(28px,5vw,48px);
+  border-radius:var(--rfull);
+  font-size:clamp(.9rem,1.8vw,1.05rem);font-weight:700;
+  text-decoration:none;
+  box-shadow:0 8px 28px rgba(37,211,102,.4);
+  transition:all .3s;
+  border:none;cursor:pointer;
+}
+.btn-wa-counsel:hover{
+  background:#1ebe5d;
+  transform:translateY(-3px);
+  box-shadow:0 14px 40px rgba(37,211,102,.5);
+}
+
+/* ── CMS DYNAMIC EPISODES ── */
+.ep-list-empty{text-align:center;padding:40px 20px;color:var(--tmut)}
+.ep-list-empty div{font-size:2rem;margin-bottom:10px}
+.ep-list-empty p{font-size:.88rem;line-height:1.6}
+
+/* ── EPISODE CARD WRAPPER ── */
+.ep-card{background:#fff;border:1px solid rgba(55,138,221,.12);border-radius:var(--r20);margin-bottom:10px;overflow:hidden;transition:border-color .3s,box-shadow .3s}
+.ep-card:hover{border-color:rgba(55,138,221,.3);box-shadow:0 8px 28px rgba(55,138,221,.1)}
+.ep-card .ep-row{border:none;border-radius:0;margin-bottom:0;background:transparent;box-shadow:none}
+.ep-card .ep-row:hover{transform:translateX(5px);border-color:transparent;box-shadow:none}
+.ep-card.ep-active .ep-row{background:var(--b50)}
+.ep-card.ep-active .ep-name{color:var(--b700)}
+.ep-card.ep-active .play-btn{background:var(--b500)}
+
+/* ── LIKE / COMMENT / SHARE BAR ── */
+.ep-actions{display:flex;align-items:center;border-top:1px solid rgba(55,138,221,.10)}
+.ep-action-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 6px;font-size:.78rem;font-weight:600;color:var(--tmut);background:none;border:none;border-right:1px solid rgba(55,138,221,.10);cursor:pointer;transition:all .2s}
+.ep-action-btn:last-child{border-right:none}
+.ep-action-btn:hover{background:var(--b50);color:var(--b700)}
+.ep-action-btn.liked{color:#e74c3c}
+.ep-action-btn svg{width:15px;height:15px;fill:currentColor;flex-shrink:0;transition:transform .2s}
+.ep-action-btn:hover svg{transform:scale(1.15)}
+.ep-action-btn.liked svg{fill:#e74c3c}
+
+/* ── COMMENT PANEL ── */
+.ep-comment-panel{display:none;padding:0 clamp(14px,2.5vw,24px) clamp(14px,2vw,20px);border-top:1px solid rgba(55,138,221,.1)}
+.ep-comment-panel.open{display:block;animation:fadeUp .22s var(--ease) both}
+.ep-comments-list{display:flex;flex-direction:column;gap:10px;margin-bottom:14px;max-height:260px;overflow-y:auto}
+.ep-comment-item{background:var(--g50);border:1px solid rgba(55,138,221,.1);border-radius:var(--r12);padding:10px 14px}
+.ep-comment-name{font-size:.72rem;font-weight:700;color:var(--b700);margin-bottom:3px}
+.ep-comment-text{font-size:.83rem;color:#0d1b3e;line-height:1.6}
+.ep-comment-time{font-size:.68rem;color:var(--tmut);margin-top:4px}
+.ep-comment-empty{font-size:.82rem;color:var(--tmut);text-align:center;padding:14px 0;font-style:italic}
+.ep-comment-form{display:flex;gap:8px;align-items:flex-end}
+.ep-comment-inputs{display:flex;flex-direction:column;gap:6px;flex:1}
+.ep-comment-input{padding:8px 12px;border-radius:var(--r8);border:1px solid rgba(55,138,221,.22);background:#fff;font-size:.82rem;font-family:'Inter',sans-serif;color:#0d1b3e;width:100%;transition:border-color .2s}
+.ep-comment-input:focus{outline:none;border-color:var(--b500);box-shadow:0 0 0 3px rgba(55,138,221,.1)}
+.ep-comment-textarea{padding:9px 12px;border-radius:var(--r8);border:1px solid rgba(55,138,221,.22);background:#fff;font-size:.83rem;font-family:'Inter',sans-serif;color:#0d1b3e;resize:none;width:100%;min-height:68px;transition:border-color .2s;line-height:1.5}
+.ep-comment-textarea:focus{outline:none;border-color:var(--b500);box-shadow:0 0 0 3px rgba(55,138,221,.1)}
+.ep-comment-submit{background:var(--b700);color:#fff;border:none;border-radius:var(--rfull);padding:10px 18px;font-size:.82rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .2s,transform .15s;align-self:flex-end}
+.ep-comment-submit:hover{background:var(--b900);transform:translateY(-1px)}
+
+/* ── SHARE MODAL ── */
+.share-backdrop{position:fixed;inset:0;background:rgba(4,44,83,.5);z-index:4000;display:flex;align-items:center;justify-content:center;padding:16px;animation:fadeIn .2s var(--ease)}
+.share-modal{background:#fff;border-radius:var(--r20);padding:clamp(24px,4vw,36px);width:100%;max-width:400px;box-shadow:0 24px 60px rgba(4,44,83,.28);animation:fadeUp .25s var(--ease)}
+.share-modal-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:900;color:var(--b900);margin-bottom:4px}
+.share-modal-sub{font-size:.82rem;color:var(--tmut);margin-bottom:20px;line-height:1.5}
+.share-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.share-opt{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:var(--r12);border:1px solid rgba(55,138,221,.18);font-size:.84rem;font-weight:600;color:#0d1b3e;background:#fff;cursor:pointer;transition:all .2s}
+.share-opt:hover{border-color:var(--b500);background:var(--b50);transform:translateY(-2px)}
+.share-opt svg{width:18px;height:18px;flex-shrink:0}
+.share-link-row{display:flex;gap:8px;margin-bottom:4px}
+.share-link-box{flex:1;padding:9px 12px;border-radius:var(--r8);border:1px solid rgba(55,138,221,.2);font-size:.76rem;color:var(--tmut);background:var(--g50);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:'Inter',sans-serif}
+.share-copy-btn{background:var(--b700);color:#fff;border:none;border-radius:var(--r8);padding:9px 16px;font-size:.8rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .2s}
+.share-copy-btn:hover{background:var(--b900)}
+.share-close{display:flex;width:100%;justify-content:center;margin-top:14px;background:none;border:none;color:var(--tmut);font-size:.82rem;cursor:pointer;padding:6px;transition:color .2s}
+.share-close:hover{color:var(--b900)}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@media(max-width:480px){.share-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <div class="brand-logo"><img src="Gmj_logo.jpg" alt="GMJ Logo" style="width:38px;height:38px;border-radius:8px;object-fit:cover;display:block"/></div>
+      <div class="brand-text"><span class="brand-name">GMJ PODCAST</span><span class="brand-sub">Good Morning Jesus</span></div>
+    </a>
+    <div class="nav-links">
+      <button class="nav-btn" onclick="location.href='index.html'">Home</button>
+      <button class="nav-btn" onclick="location.href='about.html'">About</button>
+      <button class="nav-btn active" onclick="location.href='podcast.html'">Podcast</button>
+      
+      
+      <button class="btn-counsel-nav" onclick="goTo('#counselling')">💬 Counselling</button>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a class="m-link" href="index.html">🏠 Home</a>
+  <a class="m-link" href="about.html">ℹ️ About</a>
+  <a class="m-link" href="podcast.html">🎙️ Podcast</a>
+  
+  
+  <button class="m-link m-counsel" onclick="goTo('#counselling')">💬 Book Counselling</button>
+</div>
+
+<div class="page-body">
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="ph-badge">🎙️ All Episodes</div>
+      <h1>Spirit-Filled<br/><em>Messages for You</em></h1>
+      <p>Browse our full library of anointed teachings, worship discussions, and testimony episodes — updated weekly.</p>
+    </div>
+  </div>
+  <svg class="wave-divider" viewBox="0 0 1440 52" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:52px"><path d="M0,26 C360,52 1080,0 1440,26 L1440,52 L0,52 Z" fill="#ffffff"/></svg>
+
+  <section class="section">
+    <div class="container">
+      <!-- FEATURED EPISODE (CMS-driven) -->
+      <div id="featuredSection"></div>
+
+      <div class="filter-bar">
+        <button class="f-tab active" onclick="filterEp('all',this)">All</button>
+        <button class="f-tab" onclick="filterEp('teaching',this)">Teaching</button>
+        <button class="f-tab" onclick="filterEp('worship',this)">Worship</button>
+        <button class="f-tab" onclick="filterEp('testimony',this)">Testimony</button>
+        <button class="f-tab" onclick="filterEp('counselling',this)">Counselling</button>
+        <button class="f-tab" onclick="filterEp('prayer',this)">Prayer</button>
+      </div>
+
+      <!-- EPISODE LIST (CMS-driven) -->
+      <div class="ep-list" id="epList"></div>
+
+
+
+      <div style="text-align:center;margin-top:clamp(40px,6vw,70px)">
+        <div class="eyebrow reveal" style="justify-content:center;margin-bottom:8px">Listen Everywhere</div>
+        <p style="font-size:.88rem;color:var(--tmut);margin-bottom:20px">Available on all major streaming platforms</p>
+        <div class="plat-grid">
+          <a href="https://chat.whatsapp.com/BkG8mkC65aVCqeGCuuV4hS?mode=gi_t" target="_blank" rel="noopener" class="plat-pill plat-whatsapp"><span class="plat-icon" style="color:#25D366"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a10.56 10.56 0 0 1-5.369-1.461l-.385-.229-3.989 1.046 1.064-3.886-.251-.399a10.56 10.56 0 0 1-1.617-5.623c.002-5.834 4.748-10.578 10.584-10.578a10.52 10.52 0 0 1 7.48 3.099 10.52 10.52 0 0 1 3.095 7.483c-.003 5.835-4.748 10.578-10.582 10.578"/></svg></span>WhatsApp</a>
+          <a href="https://instagram.com/GMJ.Podcast" target="_blank" rel="noopener" class="plat-pill plat-instagram"><span class="plat-icon" style="color:#E1306C"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069m0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073m0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162m0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4m6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44"/></svg></span>Instagram</a>
+          <a href="https://t.me/GMJPodcast" target="_blank" rel="noopener" class="plat-pill plat-telegram"><span class="plat-icon" style="color:#0088CC"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></span>Telegram</a>
+          <a href="https://open.spotify.com/show/6Dk3oSY8gEGYVSt4v4BWuD" target="_blank" rel="noopener" class="plat-pill plat-spotify"><span class="plat-icon" style="color:#1DB954"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></span>Spotify</a>
+          <a href="https://youtube.com/@GMJPodcast" target="_blank" rel="noopener" class="plat-pill plat-youtube"><span class="plat-icon" style="color:#FF0000"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span>YouTube</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUNSELLING -->
+  <section class="section alt" id="counselling">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:clamp(28px,5vw,48px)">
+        <div class="eyebrow reveal" style="justify-content:center">Pastoral Care</div>
+        <div class="sec-title reveal" style="margin-bottom:8px">Need Someone to Talk To?</div>
+        <p style="font-size:.9rem;color:var(--tmut);max-width:500px;margin:0 auto;line-height:1.75">We are here for you — 100% confidential, faith-centred, and compassionate. Reach out to us directly on WhatsApp.</p>
+      </div>
+      <div class="counsel-wrap">
+        <div class="trust-grid reveal">
+          <div class="trust-card">
+            <div class="trust-icon">🔒</div>
+            <div class="trust-title">100% Confidential</div>
+            <div class="trust-desc">Everything shared in your session stays between you and your counsellor. We hold your trust sacred.</div>
+          </div>
+          <div class="trust-card">
+            <div class="trust-icon">✝️</div>
+            <div class="trust-title">Faith-Centred</div>
+            <div class="trust-desc">Our counsellors integrate Biblical principles and prayer, grounding healing in God's Word and love.</div>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:clamp(28px,5vw,44px)" class="reveal">
+          <p style="font-size:.9rem;color:var(--tmut);margin-bottom:24px;line-height:1.7">Click the button below to start a private conversation with our pastoral care team on WhatsApp.</p>
+          <a href="https://wa.me/2347068790872?text=Hello%2C%20I%20would%20like%20to%20book%20a%20counselling%20session%20with%20GMJ%20Podcast." target="_blank" rel="noopener" class="btn-wa-counsel">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a10.56 10.56 0 0 1-5.369-1.461l-.385-.229-3.989 1.046 1.064-3.886-.251-.399a10.56 10.56 0 0 1-1.617-5.623c.002-5.834 4.748-10.578 10.584-10.578a10.52 10.52 0 0 1 7.48 3.099 10.52 10.52 0 0 1 3.095 7.483c-.003 5.835-4.748 10.578-10.582 10.578"/></svg>
+            Chat With Us on WhatsApp
+          </a>
+          <p style="font-size:.78rem;color:var(--tmut);margin-top:14px">Available Mon–Sat · 8am–8pm (WAT)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><img src="Gmj_logo.jpg" alt="GMJ" style="width:44px;height:44px;border-radius:8px;object-fit:cover;display:inline-block;vertical-align:middle;margin-right:8px"/> GMJ Podcast</div>
+      <p class="footer-tagline">Good · Morning · Jesus— Broadcasting the Gospel worldwide.</p>
+      <div class="footer-socials">
+          <a href="https://wa.me/2347068790872?text=Hello%2C%20I%20would%20like%20to%20book%20a%20counselling%20session%20with%20GMJ%20Podcast." target="_blank" rel="noopener" class="footer-social wa" title="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a10.56 10.56 0 0 1-5.369-1.461l-.385-.229-3.989 1.046 1.064-3.886-.251-.399a10.56 10.56 0 0 1-1.617-5.623c.002-5.834 4.748-10.578 10.584-10.578a10.52 10.52 0 0 1 7.48 3.099 10.52 10.52 0 0 1 3.095 7.483c-.003 5.835-4.748 10.578-10.582 10.578"/></svg></a>
+          <a href="https://instagram.com/GMJ.Podcast" target="_blank" rel="noopener" class="footer-social ig" title="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069m0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073m0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162m0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4m6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44"/></svg></a>
+          <a href="https://t.me/GMJPodcast" target="_blank" rel="noopener" class="footer-social tg" title="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+          <a href="https://open.spotify.com/show/6Dk3oSY8gEGYVSt4v4BWuD" target="_blank" rel="noopener" class="footer-social sp" title="Spotify"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+          <a href="https://youtube.com/@GMJPodcast" target="_blank" rel="noopener" class="footer-social yt" title="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="podcast.html">Podcast</a><a href="#counselling">Counselling</a>
+      </div>
+      <div class="footer-copy">© 2025 GMJ Podcast. All rights reserved.</div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+/* ═══════════════════════════════════
+   SANITY CMS — EPISODE LOADER
+   Replace YOUR_PROJECT_ID below with
+   your actual Sanity project ID.
+═══════════════════════════════════ */
+const SANITY_PROJECT_ID = '8ofs05v1';   // ← change this
+const SANITY_DATASET    = 'production';
+const SANITY_API_VER    = '2024-01-01';
+
+function sanityUrl(query) {
+  const encoded = encodeURIComponent(query);
+  return `https://${SANITY_PROJECT_ID}.apicdn.sanity.io/v${SANITY_API_VER}/data/query/${SANITY_DATASET}?query=${encoded}`;
+}
+
+async function fetchEpisodesFromSanity() {
+  /* GROQ query — fetch all episodes, newest first.
+     We pull the audio file URL directly from the asset reference. */
+  const query = `*[_type == "episode"] | order(publishedAt desc) {
+    _id,
+    title,
+    "num": episodeNumber,
+    series,
+    "cat": category,
+    "desc": description,
+    duration,
+    publishedAt,
+    featured,
+    "src": audioFile.asset->url
+  }`;
+
+  try {
+    const res  = await fetch(sanityUrl(query));
+    if (!res.ok) throw new Error('Sanity fetch failed: ' + res.status);
+    const data = await res.json();
+    // Normalise to the shape the rest of the page expects
+    return (data.result || []).map(ep => ({
+      id:     ep._id,
+      title:  ep.title,
+      num:    ep.num,
+      series: ep.series,
+      cat:    ep.cat,
+      desc:   ep.desc || '',
+      dur:    ep.duration,
+      src:    ep.src || '',
+      featured: ep.featured || false,
+    }));
+  } catch (err) {
+    console.error('[GMJ] Sanity fetch error:', err);
+    return [];
+  }
+}
+
+function renderFeatured(eps) {
+  const section = document.getElementById('featuredSection');
+  if (!section) return;
+  if (eps.length === 0) {
+    section.innerHTML = ``
+    return;
+  }
+  const ep = eps[0];
+  section.innerHTML = `
+    <div class="featured-card reveal">
+      <div>
+        <div class="feat-badge">🔥 Latest Episode</div>
+        <div class="feat-title">${ep.title}</div>
+        <div class="feat-desc">${ep.desc || 'Join Pastor Peter Ilesanmi in this powerful episode.'}</div>
+        <div class="feat-meta">
+          <span class="feat-dur">🕐 Episode ${ep.num} · ${ep.dur} · ${ep.series}</span>
+          <button class="btn-play-feat" onclick="playEp(this.closest('.featured-card').querySelector('.feat-title').textContent,'Episode ${ep.num} · ${ep.dur}','${ep.src}',0)">▶ Play Episode</button>
+        </div>
+      </div>
+      <div class="feat-vinyl"><div class="feat-vinyl-inner">🎙️</div></div>
+    </div>`;
+  // Trigger reveal animation
+  requestAnimationFrame(() => {
+    const fc = section.querySelector('.featured-card');
+    if (fc) setTimeout(() => fc.classList.add('in'), 50);
+  });
+}
+
+function renderEpisodeList(eps) {
+  const list = document.getElementById('epList');
+  if (!list) return;
+  if (eps.length === 0) {
+    list.innerHTML = `<div class="ep-list-empty"><div>🎙️</div><p>No episodes yet — check back soon! 🙏</p></div>`;
+    return;
+  }
+  list.innerHTML = eps.map((ep, i) => {
+    const sub    = 'Episode ' + ep.num + ' · ' + ep.dur;
+    const epId   = ep.id || ('ep_' + i);
+    const likes  = getLikes(epId);
+    const liked  = hasLiked(epId);
+    const comments = getComments(epId);
+    return `<div class="ep-card reveal" data-epid="${epId}" data-cat="${ep.cat || ''}">
+      <div class="ep-row" data-src="${ep.src||''}" data-title="${escHtml(ep.title)}" data-sub="${escHtml(sub)}" onclick="playEp(this.dataset.title,this.dataset.sub,this.dataset.src,${i})">
+        <div class="ep-badge"><img src="Gmj_logo.jpg" alt="GMJ" style="width:54px;height:54px;border-radius:8px;object-fit:cover;display:block"/></div>
+        <div class="ep-info">
+          <div class="ep-series">Episode · ${ep.num} · ${ep.series||''}</div>
+          <div class="ep-name">${escHtml(ep.title)}</div>
+          <div class="ep-snip">${escHtml(ep.desc||'')}</div>
+        </div>
+        <div class="ep-right">
+          <span class="ep-dur">${ep.dur||''}</span>
+          <button class="play-btn" onclick="playEp(this.closest('.ep-row').dataset.title,this.closest('.ep-row').dataset.sub,this.closest('.ep-row').dataset.src,${i});event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="ep-actions">
+        <button class="ep-action-btn${liked?' liked':''}" onclick="toggleLike('${epId}',this)" title="Like">
+          <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <span id="lc_${epId}">${likes} ${likes===1?'Like':'Likes'}</span>
+        </button>
+        <button class="ep-action-btn" onclick="toggleComments('${epId}')" title="Comment">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span id="cc_${epId}">${comments.length} ${comments.length===1?'Comment':'Comments'}</span>
+        </button>
+        <button class="ep-action-btn" onclick="openShare('${epId}','${escHtml(ep.title)}',event)" title="Share">
+          <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+          Share
+        </button>
+      </div>
+      <div class="ep-comment-panel" id="cp_${epId}">
+        <div class="ep-comments-list" id="cl_${epId}">
+          ${comments.length===0
+            ? '<div class="ep-comment-empty">No comments yet — be the first to share your thoughts! 🙏</div>'
+            : comments.map(c=>`<div class="ep-comment-item"><div class="ep-comment-name">${escHtml(c.name)}</div><div class="ep-comment-text">${escHtml(c.text)}</div><div class="ep-comment-time">${c.time}</div></div>`).join('')}
+        </div>
+        <div class="ep-comment-form">
+          <div class="ep-comment-inputs">
+            <input class="ep-comment-input" id="cn_${epId}" type="text" placeholder="Your name" maxlength="40"/>
+            <textarea class="ep-comment-textarea" id="ct_${epId}" placeholder="Write a comment… 🙏" maxlength="500" rows="2"></textarea>
+          </div>
+          <button class="ep-comment-submit" onclick="submitComment('${epId}')">Post</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  const ro2 = new IntersectionObserver((entries) =>
+    entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('in'), i * 60); }), { threshold: 0.08 });
+  list.querySelectorAll('.reveal').forEach(el => ro2.observe(el));
+}
+
+async function loadCMSEpisodes() {
+  const list = document.getElementById("epList");
+  if (list) list.innerHTML = `<div class="ep-list-empty"><div style="font-size:1.5rem;margin-bottom:8px">⏳</div><p>Loading episodes…</p></div>`;
+  const eps = await fetchEpisodesFromSanity();
+  const featured = eps.filter(e => e.featured);
+  renderFeatured(featured.length ? featured : eps);
+  renderEpisodeList(eps);
+  buildPlaylist();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const navbar   = document.getElementById('navbar');
+  const hamburger= document.getElementById('hamburger');
+  const mobileNav= document.getElementById('mobileNav');
+
+  if (navbar) window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 10));
+  if (hamburger && mobileNav) {
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileNav.classList.toggle('open'); });
+    document.querySelectorAll('.m-link').forEach(el =>
+      el.addEventListener('click', () => { hamburger.classList.remove('open'); mobileNav.classList.remove('open'); })
+    );
+  }
+  const ro = new IntersectionObserver((entries) =>
+    entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('in'), i * 70); }), { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  loadCMSEpisodes();
+
+  const wrap = document.getElementById('progressWrap');
+  if (wrap) {
+    wrap.addEventListener('click', (e) => {
+      if (!audio.duration) return;
+      const rect = wrap.getBoundingClientRect();
+      audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+    });
+  }
+})
+
+function goTo(sel) {
+  const el = document.querySelector(sel);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+  const mobileNav = document.getElementById('mobileNav');
+  const hamburger = document.getElementById('hamburger');
+  if (mobileNav) mobileNav.classList.remove('open');
+  if (hamburger) hamburger.classList.remove('open');
+}
+
+/* ══════════════════════════════════════════════
+   GMJ PODCAST — FULL AUDIO PLAYER ENGINE
+   ══════════════════════════════════════════════
+   HOW TO ADD YOUR OWN EPISODES:
+   1. Create an "audio/" folder next to this file
+   2. Put your MP3 files in it (e.g. audio/episode_27.mp3)
+   3. Update the "src" value in each playEp() call below
+   4. For online episodes: use the full URL as the src
+      e.g. playEp('Title','Ep 1','https://yoursite.com/ep1.mp3')
+   ══════════════════════════════════════════════ */
+
+const audio = new Audio();
+audio.preload = 'metadata';
+
+// Episode playlist — update src paths with your real audio files
+const playlist = [];
+let currentIdx = -1;
+
+function buildPlaylist() {
+  const rows = document.querySelectorAll('.ep-row[data-src]');
+  rows.forEach((row, i) => {
+    playlist.push({
+      title: row.dataset.title || 'GMJ Episode',
+      sub:   row.dataset.sub   || '',
+      src:   row.dataset.src   || '',
+      el:    row
+    });
+    row.dataset.idx = i;
+  });
+}
+
+/* ── ICON HELPERS ── */
+function setPlayIcon(playing) {
+  document.getElementById('ppIcon').innerHTML = playing
+    ? '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>'
+    : '<path d="M8 5v14l11-7z"/>';
+}
+
+function formatTime(s) {
+  if (!s || isNaN(s)) return '0:00';
+  const m = Math.floor(s / 60), sec = Math.floor(s % 60);
+  return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+/* ── TOAST ── */
+function showToast(msg, isError) {
+  const t = document.getElementById('audioToast');
+  t.textContent = msg;
+  t.style.background = isError ? '#c0392b' : '#185FA5';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+/* ── PROGRESS BAR CLICK TO SEEK ── */
+/* buildPlaylist + progressWrap setup moved into the main DOMContentLoaded above */
+
+/* ── TIME UPDATE ── */
+audio.addEventListener('timeupdate', () => {
+  if (!audio.duration) return;
+  const pct = (audio.currentTime / audio.duration) * 100;
+  document.getElementById('npFill').style.width = pct.toFixed(2) + '%';
+  document.getElementById('npTime').textContent =
+    formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
+});
+
+/* ── BUFFERED ── */
+audio.addEventListener('progress', () => {
+  if (!audio.duration || !audio.buffered.length) return;
+  const pct = (audio.buffered.end(audio.buffered.length - 1) / audio.duration) * 100;
+  const buf = document.getElementById('npBuffered');
+  if (buf) buf.style.width = pct.toFixed(2) + '%';
+});
+
+/* ── LOADING ── */
+audio.addEventListener('waiting', () => {
+  document.getElementById('npSpin').classList.add('show');
+  setPlayIcon(false);
+});
+audio.addEventListener('canplay', () => {
+  document.getElementById('npSpin').classList.remove('show');
+});
+audio.addEventListener('playing', () => {
+  document.getElementById('npSpin').classList.remove('show');
+  setPlayIcon(true);
+});
+
+/* ── ENDED ── */
+audio.addEventListener('ended', () => {
+  setPlayIcon(false);
+  document.getElementById('npFill').style.width = '0%';
+  document.getElementById('npTime').textContent = '0:00 / ' + formatTime(audio.duration);
+  // Auto-advance to next episode
+  if (currentIdx < playlist.length - 1) {
+    setTimeout(() => nextEp(), 1000);
+  }
+});
+
+/* ── ERROR ── 
+   MediaError codes:
+   1 = aborted  2 = network error  3 = decode error  4 = src not supported / file not found
+   Code 4 fires for BOTH truly unsupported formats AND missing/404 files — we check the
+   file extension to decide which message to show.
+*/
+audio.addEventListener('error', () => {
+  document.getElementById('npSpin').classList.remove('show');
+  setPlayIcon(false);
+  const src = audio.src || '';
+  if (!src || src === window.location.href) return;
+
+  const code = audio.error ? audio.error.code : 0;
+  const isLocalPath = !src.startsWith('http') || src.includes(window.location.host);
+  const ext = src.split('.').pop().toLowerCase().split('?')[0];
+  const supportedFormats = ['mp3','m4a','ogg','wav','aac','opus','webm'];
+
+  if (code === 4 && supportedFormats.includes(ext)) {
+    // File not found (correct format, just missing)
+    showToast('📁 Audio file not found — place your MP3 in the audio/ folder next to podcast.html', true);
+  } else if (code === 4 && !supportedFormats.includes(ext)) {
+    // Truly unsupported format
+    showToast('⚠️ Format not supported — convert your audio to MP3 or M4A', true);
+  } else if (code === 2) {
+    showToast('🌐 Network error — check your internet connection', true);
+  } else if (code === 3) {
+    showToast('⚠️ Audio file is corrupted or incomplete', true);
+  } else if (src && isLocalPath) {
+    showToast('📁 Audio file not found — place your MP3 in the audio/ folder next to podcast.html', true);
+  }
+});
+
+/* ── MAIN PLAY FUNCTION ── */
+function playEp(title, sub, src, idx) {
+  // Update player UI immediately
+  document.getElementById('npTitle').textContent = title;
+  document.getElementById('npSub').textContent = 'GMJ Podcast · ' + sub;
+  document.getElementById('npFill').style.width = '0%';
+  document.getElementById('npTime').textContent = '0:00 / 0:00';
+  document.getElementById('npBuffered').style.width = '0%';
+
+  // Show player bar
+  document.getElementById('playerBar').classList.add('show');
+  document.body.classList.add('player-open');
+
+  // Highlight active card
+  document.querySelectorAll('.ep-card').forEach(r => r.classList.remove('ep-active'));
+  if (idx !== undefined && playlist[idx]) {
+    const row = playlist[idx].el;
+    const card = row.closest ? (row.closest('.ep-card') || row) : row;
+    card.classList.add('ep-active');
+    currentIdx = idx;
+  }
+
+  // Guard: no src provided
+  if (!src || src.trim() === '' || src.includes('undefined')) {
+    setPlayIcon(false);
+    document.getElementById('npSpin').classList.remove('show');
+    showToast('📁 No audio linked — add the MP3 path to this episode', true);
+    return;
+  }
+
+  // Stop any current playback cleanly
+  audio.pause();
+  audio.removeAttribute('src');
+  audio.load();
+
+  // Show spinner while loading
+  document.getElementById('npSpin').classList.add('show');
+  setPlayIcon(false);
+
+  // Set new source and attempt playback
+  audio.src = src;
+
+  // Use canplaythrough for reliable autoplay instead of load()
+  const onCanPlay = () => {
+    audio.removeEventListener('canplaythrough', onCanPlay);
+    audio.play()
+      .then(() => {
+        setPlayIcon(true);
+        document.getElementById('npSpin').classList.remove('show');
+      })
+      .catch((err) => {
+        document.getElementById('npSpin').classList.remove('show');
+        setPlayIcon(false);
+        if (err.name === 'NotAllowedError') {
+          // Autoplay policy — user must click play manually, which is fine
+          // Just show the play icon so they can click it
+          setPlayIcon(false);
+        }
+        // Other errors handled by the 'error' event listener above
+      });
+  };
+
+  audio.addEventListener('canplaythrough', onCanPlay);
+
+  // Fallback: try playing immediately (works when file is already cached)
+  audio.load();
+  audio.play()
+    .then(() => {
+      audio.removeEventListener('canplaythrough', onCanPlay);
+      setPlayIcon(true);
+      document.getElementById('npSpin').classList.remove('show');
+    })
+    .catch((err) => {
+      if (err.name === 'NotAllowedError') {
+        document.getElementById('npSpin').classList.remove('show');
+        setPlayIcon(false);
+      }
+      // For other errors: error event will fire and show the right message
+    });
+}
+
+/* ── TOGGLE PLAY/PAUSE ── */
+function togglePlay() {
+  if (!audio.src || audio.src === window.location.href) {
+    showToast('Select an episode first!', false);
+    return;
+  }
+  if (audio.paused) {
+    audio.play()
+      .then(() => setPlayIcon(true))
+      .catch(() => setPlayIcon(false));
+  } else {
+    audio.pause();
+    setPlayIcon(false);
+  }
+}
+
+/* ── PREV / NEXT ── */
+function prevEp() {
+  if (currentIdx > 0) {
+    const ep = playlist[currentIdx - 1];
+    playEp(ep.title, ep.sub, ep.src, currentIdx - 1);
+  } else {
+    showToast("You're at the first episode!", false);
+  }
+}
+function nextEp() {
+  if (currentIdx < playlist.length - 1) {
+    const ep = playlist[currentIdx + 1];
+    playEp(ep.title, ep.sub, ep.src, currentIdx + 1);
+  } else {
+    showToast("You've reached the last episode!", false);
+  }
+}
+
+/* ── VOLUME ── */
+function setVolume(val) {
+  audio.volume = parseFloat(val);
+  const ico = document.getElementById('volIcon');
+  if (!ico) return;
+  if (val == 0) {
+    ico.innerHTML = '<path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>';
+  } else if (val < 0.5) {
+    ico.innerHTML = '<path d="M18.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM5 9v6h4l5 5V4L9 9H5z"/>';
+  } else {
+    ico.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>';
+  }
+}
+function toggleMute() {
+  audio.muted = !audio.muted;
+  const slider = document.getElementById('volSlider');
+  if (slider) slider.value = audio.muted ? 0 : audio.volume;
+  setVolume(audio.muted ? 0 : audio.volume);
+}
+
+/* ── CLOSE PLAYER ── */
+function closePlayer() {
+  audio.pause();
+  audio.src = '';
+  setPlayIcon(false);
+  document.getElementById('playerBar').classList.remove('show');
+  document.body.classList.remove('player-open');
+  document.getElementById('npFill').style.width = '0%';
+  document.getElementById('npTime').textContent = '0:00 / 0:00';
+  document.querySelectorAll('.ep-card,.ep-row').forEach(r => r.classList.remove('ep-active'));
+  currentIdx = -1;
+}
+function filterEp(cat,btn){
+  document.querySelectorAll('.f-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.ep-card').forEach(card=>{
+    const show = cat==='all' || card.dataset.cat===cat;
+    card.style.transition='opacity .22s,transform .22s';
+    if(show){card.style.display='block';setTimeout(()=>{card.style.opacity='1';card.style.transform='none'},10)}
+    else{card.style.opacity='0';card.style.transform='translateY(-4px)';setTimeout(()=>card.style.display='none',230)}
+  });
+}
+function submitForm(){document.getElementById('formWrap').style.display='none';document.getElementById('successBox').classList.add('show')}
+function resetForm(){document.getElementById('formWrap').style.display='block';document.getElementById('successBox').classList.remove('show')}
+
+/* ══════════════════════════════════
+   LIKE / COMMENT / SHARE ENGINE
+   Persisted in localStorage per device
+══════════════════════════════════ */
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
+
+/* LIKES */
+function getLikes(id){return parseInt(localStorage.getItem('gmj_lk_'+id)||'0',10)}
+function hasLiked(id){return localStorage.getItem('gmj_ld_'+id)==='1'}
+function toggleLike(id,btn){
+  const liked=hasLiked(id);
+  let count=getLikes(id);
+  if(!liked){count++;localStorage.setItem('gmj_ld_'+id,'1')}
+  else{count=Math.max(0,count-1);localStorage.removeItem('gmj_ld_'+id)}
+  localStorage.setItem('gmj_lk_'+id,count);
+  btn.classList.toggle('liked',!liked);
+  const el=document.getElementById('lc_'+id);
+  if(el)el.textContent=count+' '+(count===1?'Like':'Likes');
+  btn.style.transform='scale(1.3)';
+  setTimeout(()=>btn.style.transform='',220);
+  showToast(!liked?'❤️ You liked this episode!':'💔 Like removed',false);
+}
+
+/* COMMENTS */
+function getComments(id){try{return JSON.parse(localStorage.getItem('gmj_cm_'+id)||'[]')}catch{return[]}}
+function saveComments(id,arr){localStorage.setItem('gmj_cm_'+id,JSON.stringify(arr))}
+function toggleComments(id){
+  const panel=document.getElementById('cp_'+id);
+  if(!panel)return;
+  const wasOpen=panel.classList.contains('open');
+  document.querySelectorAll('.ep-comment-panel.open').forEach(p=>{if(p.id!=='cp_'+id)p.classList.remove('open')});
+  panel.classList.toggle('open',!wasOpen);
+  if(!wasOpen){const tf=document.getElementById('ct_'+id);if(tf)setTimeout(()=>tf.focus(),180)}
+}
+function submitComment(id){
+  const nameEl=document.getElementById('cn_'+id);
+  const textEl=document.getElementById('ct_'+id);
+  const ccEl=document.getElementById('cc_'+id);
+  const clEl=document.getElementById('cl_'+id);
+  if(!textEl)return;
+  const name=(nameEl&&nameEl.value.trim())||'Anonymous';
+  const text=(textEl.value||'').trim();
+  if(!text){showToast('Please write something before posting 😊',false);if(textEl)textEl.focus();return;}
+  const now=new Date();
+  const time=now.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+' · '+now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  const comments=getComments(id);
+  comments.push({name,text,time});
+  saveComments(id,comments);
+  const empty=clEl&&clEl.querySelector('.ep-comment-empty');
+  if(empty)empty.remove();
+  if(clEl){
+    const div=document.createElement('div');
+    div.className='ep-comment-item';
+    div.innerHTML=`<div class="ep-comment-name">${escHtml(name)}</div><div class="ep-comment-text">${escHtml(text)}</div><div class="ep-comment-time">${time}</div>`;
+    clEl.appendChild(div);clEl.scrollTop=clEl.scrollHeight;
+  }
+  if(ccEl)ccEl.textContent=comments.length+' '+(comments.length===1?'Comment':'Comments');
+  if(textEl)textEl.value='';
+  showToast('🙏 Comment posted — God bless you!',false);
+}
+
+/* SHARE */
+function openShare(id,title,e){
+  if(e)e.stopPropagation();
+  const url=window.location.href.split('?')[0].split('#')[0]+'#ep_'+id;
+  const old=document.getElementById('gmj-share-modal');if(old)old.remove();
+  const bd=document.createElement('div');
+  bd.className='share-backdrop';bd.id='gmj-share-modal';
+  bd.innerHTML=`<div class="share-modal" onclick="event.stopPropagation()">
+    <div class="share-modal-title">Share Episode</div>
+    <div class="share-modal-sub">"${escHtml(title)}"</div>
+    <div class="share-grid">
+      <button class="share-opt" onclick="shareVia('whatsapp','${escHtml(title)}','${url}')"><svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a10.56 10.56 0 0 1-5.369-1.461l-.385-.229-3.989 1.046 1.064-3.886-.251-.399a10.56 10.56 0 0 1-1.617-5.623c.002-5.834 4.748-10.578 10.584-10.578a10.52 10.52 0 0 1 7.48 3.099 10.52 10.52 0 0 1 3.095 7.483c-.003 5.835-4.748 10.578-10.582 10.578"/></svg>WhatsApp</button>
+      <button class="share-opt" onclick="shareVia('telegram','${escHtml(title)}','${url}')"><svg viewBox="0 0 24 24" fill="#0088CC"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Telegram</button>
+      <button class="share-opt" onclick="shareVia('twitter','${escHtml(title)}','${url}')"><svg viewBox="0 0 24 24" fill="#000"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X / Twitter</button>
+      <button class="share-opt" onclick="shareVia('facebook','${escHtml(title)}','${url}')"><svg viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Facebook</button>
+    </div>
+    <div class="share-link-row">
+      <div class="share-link-box">${url}</div>
+      <button class="share-copy-btn" onclick="copyLink('${url}',this)">Copy</button>
+    </div>
+    <button class="share-close" onclick="closeShare()">✕ Close</button>
+  </div>`;
+  bd.addEventListener('click',closeShare);
+  document.body.appendChild(bd);
+  document.addEventListener('keydown',shareEsc);
+}
+function closeShare(){const m=document.getElementById('gmj-share-modal');if(m)m.remove();document.removeEventListener('keydown',shareEsc)}
+function shareEsc(e){if(e.key==='Escape')closeShare()}
+function shareVia(p,title,url){
+  const eu=encodeURIComponent(url),et=encodeURIComponent('🎙️ '+title+' — GMJ Podcast');
+  const map={whatsapp:'https://wa.me/?text='+et+'%20'+eu,telegram:'https://t.me/share/url?url='+eu+'&text='+et,twitter:'https://twitter.com/intent/tweet?text='+et+'&url='+eu,facebook:'https://www.facebook.com/sharer/sharer.php?u='+eu};
+  if(map[p])window.open(map[p],'_blank','noopener,noreferrer');
+  closeShare();
+}
+function copyLink(url,btn){
+  navigator.clipboard.writeText(url).then(()=>{btn.textContent='Copied!';btn.style.background='#27ae60';setTimeout(()=>{btn.textContent='Copy';btn.style.background=''},2200)}).catch(()=>showToast('Copy failed — select link manually',false));
+}
+</script>
+
+<!-- ── FIXED BOTTOM PLAYER (direct body child for correct position:fixed) ── -->
+<div class="player-bar" id="playerBar">
+  <div class="pb-progress-wrap" id="progressWrap">
+    <div class="np-buffered" id="npBuffered"></div>
+    <div class="np-fill" id="npFill"></div>
+  </div>
+  <div class="pb-inner">
+    <img class="np-art" src="Gmj_logo.jpg" alt="GMJ" id="npArt"/>
+    <div class="np-info">
+      <div class="np-title" id="npTitle">Select an episode to play</div>
+      <div class="np-sub" id="npSub">GMJ Podcast · Pastor Peter Ilesanmi</div>
+    </div>
+    <div class="np-spin" id="npSpin"></div>
+    <div class="np-time" id="npTime">0:00 / 0:00</div>
+    <div class="np-ctrl">
+      <button class="nc-btn" id="prevBtn" title="Previous" onclick="prevEp()">
+        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+      </button>
+      <button class="nc-btn play-main" id="ppBtn" title="Play / Pause" onclick="togglePlay()">
+        <svg viewBox="0 0 24 24" id="ppIcon"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <button class="nc-btn" id="nextBtn" title="Next" onclick="nextEp()">
+        <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zm2-8.14L11.03 12 8 14.14V9.86zM16 6h2v12h-2z"/></svg>
+      </button>
+    </div>
+    <div class="vol-wrap">
+      <svg viewBox="0 0 24 24" onclick="toggleMute()" id="volIcon"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+      <input type="range" class="vol-slider" id="volSlider" min="0" max="1" step="0.05" value="1" oninput="setVolume(this.value)"/>
+    </div>
+    <button class="nc-close" onclick="closePlayer()" title="Close">✕</button>
+  </div>
+</div>
+<!-- AUDIO ERROR TOAST -->
+<div class="audio-toast" id="audioToast"></div>
+
+</body>
+</html>
