@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>GMJ Podcast – Glory, Majesty & Joy</title>
+<title>GMJ Podcast – Good Morning Jesus</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -199,6 +199,22 @@ a{text-decoration:none;color:inherit}
 .footer-social.tg:hover{background:#0088CC;border-color:#0088CC;color:#fff}
 .footer-social.sp:hover{background:#1DB954;border-color:#1DB954;color:#fff}
 .footer-social.yt:hover{background:#FF0000;border-color:#FF0000;color:#fff}
+
+/* LATEST EPISODE POPUP */
+.ep-popup-backdrop{position:fixed;inset:0;background:rgba(3,10,25,.6);display:flex;align-items:center;justify-content:center;z-index:2000;opacity:0;pointer-events:none;transition:opacity .22s}
+.ep-popup-backdrop.open{opacity:1;pointer-events:auto}
+.ep-popup{width:min(720px,92vw);background:#fff;border-radius:16px;padding:22px;box-shadow:0 18px 60px rgba(4,44,83,.5);display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:start;position:relative}
+.ep-popup .ep-thumb{width:100%;height:120px;border-radius:12px;background:linear-gradient(135deg,var(--b700),var(--b500));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+.ep-popup h3{font-family:'Playfair Display',serif;margin:0;font-size:1.1rem;color:var(--b900)}
+.ep-popup p{margin:.45rem 0;color:var(--tmut);font-size:.95rem}
+.ep-popup .ep-meta{font-size:.86rem;color:var(--b300);font-weight:600;margin-bottom:8px}
+.ep-popup .ep-actions{display:flex;flex-direction:column;gap:8px}
+.ep-popup .btn-row{display:flex;gap:8px}
+.ep-popup .close-x{position:absolute;top:12px;right:14px;background:transparent;border:none;font-size:20px;color:var(--tm);cursor:pointer}
+.ep-popup a.btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:9999px;text-decoration:none;font-weight:700}
+.ep-popup a.primary{background:var(--b900);color:#fff}
+.ep-popup a.ghost{background:transparent;border:1px solid rgba(4,44,83,.08);color:var(--b900)}
+
 </style>
 </head>
 <body>
@@ -297,6 +313,23 @@ a{text-decoration:none;color:inherit}
       <div class="footer-copy">© 2026 GMJ Podcast. All rights reserved. Built with faith &amp; purpose.</div>
     </div>
   </footer>
+
+  <!-- Latest episode popup -->
+  <div class="ep-popup-backdrop" id="epPopup" aria-hidden="true">
+    <div class="ep-popup" role="dialog" aria-modal="true" aria-labelledby="epPopupTitle">
+      <button class="close-x" id="epPopupClose" aria-label="Close">×</button>
+      <div>
+        <div class="ep-meta" id="epPopupMeta">Latest Episode</div>
+        <h3 id="epPopupTitle">Loading…</h3>
+        <p id="epPopupDesc">Please wait while we fetch the latest episode.</p>
+        <div class="btn-row">
+          <a href="#" class="btn primary" id="epPopupListen">Listen →</a>
+          <a href="podcast.html" class="btn ghost">View Episodes</a>
+        </div>
+      </div>
+      <div class="ep-thumb" id="epPopupThumb">GMJ</div>
+    </div>
+  </div>
 
 </div>
 
@@ -398,6 +431,80 @@ async function loadHomeEpisodes(){
   }
 }
 function escHomeHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+// Latest episode popup: fetches most recent episode and shows modal (once per 24h)
+async function loadLatestEpisodePopup(){
+  try{
+    const key = 'gmj_popup_dismissed_ts';
+    const last = parseInt(localStorage.getItem(key) || '0', 10);
+    const now = Date.now();
+    const DAY = 24 * 60 * 60 * 1000;
+    if(last && (now - last) < DAY) return; // skipped recently
+
+    const q = `*[_type == "episode"] | order(publishedAt desc)[0] { _id, title, "num": episodeNumber, series, "desc": description, duration, publishedAt, "src": audioFile.asset->url }`;
+    const res = await fetch(homeSanityUrl(q));
+    if(!res.ok) return;
+    const js = await res.json();
+    const ep = (js && js.result && js.result[0]) || null;
+    if(!ep) return;
+
+    const popup = document.getElementById('epPopup');
+    const closeBtn = document.getElementById('epPopupClose');
+    const titleEl = document.getElementById('epPopupTitle');
+    const descEl  = document.getElementById('epPopupDesc');
+    const metaEl  = document.getElementById('epPopupMeta');
+    const listenA  = document.getElementById('epPopupListen');
+    const thumb   = document.getElementById('epPopupThumb');
+    if(!popup || !titleEl) return;
+
+    const num = ep.num || '—';
+    const ser = ep.series || 'GMJ Podcast';
+    const desc = ep.desc || '';
+    const pub = ep.publishedAt ? new Date(ep.publishedAt).toLocaleDateString() : '';
+
+    titleEl.textContent = ep.title || 'Untitled Episode';
+    descEl.textContent  = desc;
+    metaEl.textContent  = `Episode ${num} · ${ser} ${pub ? '· ' + pub : ''}`;
+    thumb.textContent   = `Ep ${num}`;
+
+    if(ep.src){
+      listenA.href = ep.src;
+      listenA.target = '_blank';
+      listenA.rel = 'noopener';
+    } else {
+      listenA.href = 'podcast.html';
+    }
+
+    // show popup
+    popup.classList.add('open');
+    popup.setAttribute('aria-hidden', 'false');
+
+    function closePopup(){
+      popup.classList.remove('open');
+      popup.setAttribute('aria-hidden', 'true');
+      // remember dismissal for 24 hours
+      try{ localStorage.setItem(key, String(Date.now())); }catch(e){}
+      // cleanup
+      closeBtn.removeEventListener('click', closePopup);
+      popup.removeEventListener('click', backdropClose);
+      document.removeEventListener('keydown', escClose);
+    }
+    function backdropClose(e){ if(e.target === popup) closePopup(); }
+    function escClose(e){ if(e.key === 'Escape') closePopup(); }
+
+    closeBtn.addEventListener('click', closePopup);
+    popup.addEventListener('click', backdropClose);
+    document.addEventListener('keydown', escClose);
+
+  }catch(err){ console.warn('[GMJ Popup] failed to load latest episode', err); }
+}
+
+// call popup loader after DOM is ready (we also call it in the existing listener)
+if(document.readyState === 'complete' || document.readyState === 'interactive'){
+  // small timeout so it doesn't compete with initial animations
+  setTimeout(loadLatestEpisodePopup, 900);
+}
+
 </script>
 </body>
 </html>
