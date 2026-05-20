@@ -364,6 +364,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Load top 3 episodes from Sanity
   loadHomeEpisodes();
+  // Show latest episode popup on page load
+  loadLatestEpisodePopup();
 });
 
 /* ── SANITY CONFIG (must match podcast.html) ── */
@@ -432,15 +434,9 @@ async function loadHomeEpisodes(){
 }
 function escHomeHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 
-// Latest episode popup: fetches most recent episode and shows modal (once per 24h)
+// Latest episode popup: fetches most recent episode and shows modal on page load
 async function loadLatestEpisodePopup(){
   try{
-    const key = 'gmj_popup_dismissed_ts';
-    const last = parseInt(localStorage.getItem(key) || '0', 10);
-    const now = Date.now();
-    const DAY = 24 * 60 * 60 * 1000;
-    if(last && (now - last) < DAY) return; // skipped recently
-
     const q = `*[_type == "episode"] | order(publishedAt desc)[0] { _id, title, "num": episodeNumber, series, "desc": description, duration, publishedAt, "src": audioFile.asset->url }`;
     const res = await fetch(homeSanityUrl(q));
     if(!res.ok) return;
@@ -482,8 +478,6 @@ async function loadLatestEpisodePopup(){
     function closePopup(){
       popup.classList.remove('open');
       popup.setAttribute('aria-hidden', 'true');
-      // remember dismissal for 24 hours
-      try{ localStorage.setItem(key, String(Date.now())); }catch(e){}
       // cleanup
       closeBtn.removeEventListener('click', closePopup);
       popup.removeEventListener('click', backdropClose);
@@ -499,11 +493,6 @@ async function loadLatestEpisodePopup(){
   }catch(err){ console.warn('[GMJ Popup] failed to load latest episode', err); }
 }
 
-// call popup loader after DOM is ready (we also call it in the existing listener)
-if(document.readyState === 'complete' || document.readyState === 'interactive'){
-  // small timeout so it doesn't compete with initial animations
-  setTimeout(loadLatestEpisodePopup, 900);
-}
 
 </script>
 </body>
