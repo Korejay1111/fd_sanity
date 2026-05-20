@@ -364,9 +364,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Load top 3 episodes from Sanity
   loadHomeEpisodes();
-  // Show latest episode popup on page load
-  loadLatestEpisodePopup();
+  // Show latest episode popup after the homepage is ready
+  setTimeout(loadLatestEpisodePopup, 900);
 });
+
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  setTimeout(loadLatestEpisodePopup, 900);
+}
 
 /* ── SANITY CONFIG (must match podcast.html) ── */
 const HOME_SANITY_PROJECT_ID = '8ofs05v1';
@@ -472,12 +476,14 @@ async function loadLatestEpisodePopup(){
     }
 
     // show popup
+    document.body.style.overflow = 'hidden';
     popup.classList.add('open');
     popup.setAttribute('aria-hidden', 'false');
 
     function closePopup(){
       popup.classList.remove('open');
       popup.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
       // cleanup
       closeBtn.removeEventListener('click', closePopup);
       popup.removeEventListener('click', backdropClose);
